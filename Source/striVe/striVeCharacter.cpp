@@ -89,6 +89,7 @@ void AstriVeCharacter::TouchStopped(const ETouchIndex::Type FingerIndex, const F
 void AstriVeCharacter::StartAttack1()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Using attack 1"));
+	wasFirstAttackUsed = true;
 }
 
 void AstriVeCharacter::StartAttack2()

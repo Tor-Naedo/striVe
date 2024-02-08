@@ -42,6 +42,10 @@ protected:
 	//Damage Player
 	void TakeDamage(float _damageAmount);
 
+	//Has the player used teh basic Attack?
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attacks")
+		bool wasFirstAttackUsed;
+
 	//The amount of health the character currently has
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
 		float playerHealth;
