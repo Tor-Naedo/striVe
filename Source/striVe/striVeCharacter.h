@@ -19,6 +19,11 @@ class AstriVeCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class USpringArmComponent* CameraBoom;
 
+	void StartAttack1();
+	void StartAttack2();
+	void StartAttack3();
+	void StartAttack4();
+
 protected:
 
 	/** Called for side to side input */
@@ -33,6 +38,13 @@ protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 	// End of APawn interface
+
+	//Damage Player
+	void TakeDamage(float _damageAmount);
+
+	//The amount of health the character currently has
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
+		float playerHealth;
 
 
 public:

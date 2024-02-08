@@ -41,6 +41,7 @@ AstriVeCharacter::AstriVeCharacter()
 	GetCharacterMovement()->MaxWalkSpeed = 600.f;
 	GetCharacterMovement()->MaxFlySpeed = 600.f;
 
+	playerHealth = 1.00f;
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 }
@@ -54,6 +55,15 @@ void AstriVeCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerIn
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AstriVeCharacter::MoveRight);
+
+	PlayerInputComponent->BindAction("Attack1", IE_Pressed, this, &AstriVeCharacter::StartAttack1);
+	//PlayerInputComponent->BindAction("Attack1", IE_Released, this, &AstriVeCharacter::StopAttack1); 
+	PlayerInputComponent->BindAction("Attack2", IE_Pressed, this, &AstriVeCharacter::StartAttack2);
+	//PlayerInputComponent->BindAction("Attack2", IE_Released, this, &AstriVeCharacter::StopAttack2); 
+	PlayerInputComponent->BindAction("Attack3", IE_Pressed, this, &AstriVeCharacter::StartAttack3);
+	//PlayerInputComponent->BindAction("Attack3", IE_Released, this, &AstriVeCharacter::StopAttack3); 
+	PlayerInputComponent->BindAction("Attack4", IE_Pressed, this, &AstriVeCharacter::StartAttack4);
+	//PlayerInputComponent->BindAction("Attack4", IE_Released, this, &AstriVeCharacter::StopAttack4); 
 
 	PlayerInputComponent->BindTouch(IE_Pressed, this, &AstriVeCharacter::TouchStarted);
 	PlayerInputComponent->BindTouch(IE_Released, this, &AstriVeCharacter::TouchStopped);
@@ -76,3 +86,34 @@ void AstriVeCharacter::TouchStopped(const ETouchIndex::Type FingerIndex, const F
 	StopJumping();
 }
 
+void AstriVeCharacter::StartAttack1()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Using attack 1"));
+}
+
+void AstriVeCharacter::StartAttack2()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Using attack 2"));
+}
+
+void AstriVeCharacter::StartAttack3()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Using attack 3"));
+}
+
+void AstriVeCharacter::StartAttack4()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Using attack 4"));
+	TakeDamage(0.05f);
+}
+
+void AstriVeCharacter::TakeDamage(float _damageAmount)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Taking Damage"), _damageAmount);
+	playerHealth -= _damageAmount;
+
+	if (playerHealth < 0.00f)
+	{
+		playerHealth = 0.00f;
+	}
+}
