@@ -40,6 +40,7 @@ protected:
 	// End of APawn interface
 
 	//Damage Player
+	UFUNCTION(BlueprintCallable)
 	void TakeDamage(float _damageAmount);
 
 	//Has the player used teh basic Attack?
