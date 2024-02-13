@@ -37,11 +37,16 @@ protected:
 
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
-	// End of APawn interface
+	
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character")
+	//ECharacterClass characterClass;
 
-	//Damage Player
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Hitbox")
+		AActor* hurtbox;
+
+	//Damage the player.
 	UFUNCTION(BlueprintCallable)
-	void TakeDamage(float _damageAmount);
+		void TakeDamage(float _damageAmount);
 
 	//Has the player used teh basic Attack?
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attacks")
