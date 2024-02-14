@@ -114,17 +114,19 @@ void AstriVeCharacter::StartAttack1()
 void AstriVeCharacter::StartAttack2()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Using attack 2"));
+	wasSecondAttackUsed = true;
 }
 
 void AstriVeCharacter::StartAttack3()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Using attack 3"));
+	wasThirdAttackUsed = true;
 }
 
 void AstriVeCharacter::StartAttack4()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Using attack 4"));
-	TakeDamage(0.05f);
+	wasFourthAttackUsed = true;
 }
 
 void AstriVeCharacter::TakeDamage(float _damageAmount)
@@ -150,7 +152,7 @@ void  AstriVeCharacter::Tick(float DeltaTime)
 		{
 			if (auto enemyMovement = otherPlayer->GetCharacterMovement())
 			{
-				if (enemyMovement->GetActorLocation().Y >= characterMovement->GetActorLocation().Y)
+				if (enemyMovement->GetActorLocation().Y <= characterMovement->GetActorLocation().Y)
 				{
 					if (isFlipped)
 					{

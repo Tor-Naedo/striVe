@@ -66,9 +66,21 @@ protected:
 	UFUNCTION(BlueprintCallable)
 		void TakeDamage(float _damageAmount);
 
-	//Has the player used teh basic Attack?
+	//Has the player used the LPunch Attack?
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attacks")
 		bool wasFirstAttackUsed;
+
+	//Has the player used the RPunch Attack?
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attacks")
+		bool wasSecondAttackUsed;
+
+	//Has the player used the LKick Attack?
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attacks")
+		bool wasThirdAttackUsed;
+
+	//Has the player used the RKick Attack?
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attacks")
+		bool wasFourthAttackUsed;
 
 	//The amount of health the character currently has
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
