@@ -6,6 +6,16 @@
 #include "GameFramework/Character.h"
 #include "striVeCharacter.generated.h"
 
+UENUM(BlueprintType)
+enum class ECharacterState : uint8
+{
+	VE_Default			UMETA(DisplayName =	"NOT_MOVING"),
+	VE_MovingRight		UMETA(DisplayName =	"MOVING_RIGHT"),
+	VE_MovingLeft		UMETA(DisplayName =	"MOVING_LEFT"),
+	VE_Jumping			UMETA(DisplayName =	"JUMPING"),
+	VE_Blocking			UMETA(DisplayName = "Blocking")
+};
+
 UCLASS(config=Game)
 class AstriVeCharacter : public ACharacter
 {
@@ -44,6 +54,10 @@ protected:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	//the direction the character is moving OR the direction the player is holding down
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+		ECharacterState characterState;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player References")
 		AstriVeCharacter* otherPlayer;
 
@@ -61,6 +75,27 @@ protected:
 	//The maximum amount of distance that the players can be apart
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
 		float maxDistanceApart;
+
+	//Override the ACharacter and APawn functionality to have more control over jumps and landings
+	virtual void Jump() override;
+	//virtual void StopJumping()override;
+	virtual void Landed(const FHitResult& Hit) override;
+
+	//Make the character begin crouching
+	UFUNCTION(BlueprintCallable)
+		void StartCrouching();
+
+	//Make the character stop crouching
+	UFUNCTION(BlueprintCallable)
+		void StopCrouching();
+
+	//Make the character begin blocking
+	UFUNCTION(BlueprintCallable)
+		void StartBlocking();
+
+	//Make the character stop blocking
+	UFUNCTION(BlueprintCallable)
+		void StopBlocking();
 
 	//Damage the player.
 	UFUNCTION(BlueprintCallable)
@@ -89,6 +124,10 @@ protected:
 	//Is the character's model flipped?
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Model")
 		bool isFlipped;
+
+	//Is the character currently crouching
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+		bool isCrouching;
 
 public:
 	AstriVeCharacter();

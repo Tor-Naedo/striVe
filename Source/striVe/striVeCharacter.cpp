@@ -58,9 +58,13 @@ maxDistanceApart = 800.0f;
 void AstriVeCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
 	// set up gameplay key bindings
-	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
-	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AstriVeCharacter::Jump);
+	PlayerInputComponent->BindAction("Jump", IE_Released, this, &AstriVeCharacter::StopJumping);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AstriVeCharacter::MoveRight);
+	PlayerInputComponent->BindAction("Crouch", IE_Pressed, this, &AstriVeCharacter::StartCrouching);
+	PlayerInputComponent->BindAction("Crouch", IE_Released, this, &AstriVeCharacter::StopCrouching);
+	PlayerInputComponent->BindAction("Block", IE_Pressed, this, &AstriVeCharacter::StartBlocking);
+	PlayerInputComponent->BindAction("Block", IE_Released, this, &AstriVeCharacter::StopBlocking);
 
 	PlayerInputComponent->BindAction("Attack1", IE_Pressed, this, &AstriVeCharacter::StartAttack1);
 	//PlayerInputComponent->BindAction("Attack1", IE_Released, this, &AstriVeCharacter::StopAttack1); 
@@ -75,8 +79,65 @@ void AstriVeCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerIn
 	PlayerInputComponent->BindTouch(IE_Released, this, &AstriVeCharacter::TouchStopped);
 }
 
+void AstriVeCharacter::Jump()
+{
+	ACharacter::Jump();
+	characterState = ECharacterState::VE_Jumping;
+}
+
+//
+//void AstriVeCharacter::StopJumping()
+//{
+	//ACharacter::StopJumping;
+//}
+
+void AstriVeCharacter::Landed(const FHitResult& Hit)
+{
+	characterState = ECharacterState::VE_Default;
+}
+
+void AstriVeCharacter::StartCrouching()
+{
+	isCrouching = true;
+}
+
+void AstriVeCharacter::StopCrouching()
+{
+	isCrouching = false;
+}
+
+void AstriVeCharacter::StartBlocking()
+{
+	characterState = ECharacterState::VE_Blocking;
+}
+
+void AstriVeCharacter::StopBlocking()
+{
+	characterState = ECharacterState::VE_Default;
+}
+
 void AstriVeCharacter::MoveRight(float Value)
 {
+	if (!isCrouching && characterState != ECharacterState::VE_Blocking)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("The directional input is %f"), Value);
+
+	if (characterState != ECharacterState::VE_Jumping)
+	{
+		if (Value > 0.20f)
+		{
+			characterState = ECharacterState::VE_MovingRight;
+		}
+		else if (Value < -0.20f)
+		{
+			characterState = ECharacterState::VE_MovingLeft;
+		}
+		else
+		{
+			characterState = ECharacterState::VE_Default;
+		}
+	}
+
 	float currentDistanceApart = abs(otherPlayer->GetActorLocation().Y - GetActorLocation().Y);
 
 	if (currentDistanceApart >= maxDistanceApart)
@@ -91,6 +152,7 @@ void AstriVeCharacter::MoveRight(float Value)
 	{
 		// add movement in that direction
 		AddMovementInput(FVector(0.0f, 1.0f, 0.0f), Value);
+	}
 	}
 }
 
@@ -131,9 +193,17 @@ void AstriVeCharacter::StartAttack4()
 
 void AstriVeCharacter::TakeDamage(float _damageAmount)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Taking Damage"), _damageAmount);
-	playerHealth -= _damageAmount;
-
+	if (characterState != ECharacterState::VE_Blocking)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("We are taking damage for %f points."), _damageAmount);
+		playerHealth -= _damageAmount;
+	}
+	else
+	{
+		float reducedDamage = _damageAmount * 0.5f;
+		UE_LOG(LogTemp, Warning, TEXT("We are taking reduced damage for %f points."), reducedDamage);
+		playerHealth -= reducedDamage;
+	}
 	if (playerHealth < 0.00f)
 	{
 		playerHealth = 0.00f;
