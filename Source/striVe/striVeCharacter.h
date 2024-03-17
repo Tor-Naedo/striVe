@@ -34,6 +34,28 @@ class AstriVeCharacter : public ACharacter
 	void StartAttack3();
 	void StartAttack4();
 
+	//When in Keyboard-Only Mode, use these functions to perform actions with Player 2.
+	UFUNCTION(BlueprintCallable)
+		void P2KeyboardAttack1();
+
+	UFUNCTION(BlueprintCallable)
+		void P2KeyboardAttack2();
+
+	UFUNCTION(BlueprintCallable)
+		void P2KeyboardAttack3();
+
+	UFUNCTION(BlueprintCallable)
+		void P2KeyboardAttack4();
+
+	UFUNCTION(BlueprintCallable)
+		void P2KeyboardJump();
+
+	UFUNCTION(BlueprintCallable)
+		void P2KeyboardStopJumping();
+
+	UFUNCTION(BlueprintCallable)
+		void P2KeyboardMoveRight(float _value);
+
 protected:
 
 	/** Called for side to side input */

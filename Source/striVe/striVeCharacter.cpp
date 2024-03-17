@@ -57,6 +57,7 @@ maxDistanceApart = 800.0f;
 
 void AstriVeCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
+	//if(auto gameMode = Cast<AstriVeGameMode>(GetWorldChecked()->GetAuthGameMode()))
 	// set up gameplay key bindings
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AstriVeCharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &AstriVeCharacter::StopJumping);
@@ -189,6 +190,42 @@ void AstriVeCharacter::StartAttack4()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Using attack 4"));
 	wasFourthAttackUsed = true;
+}
+
+void AstriVeCharacter::P2KeyboardAttack1()
+{
+	StartAttack1();
+}
+
+void AstriVeCharacter::P2KeyboardAttack2()
+{
+	StartAttack2();
+}
+
+void AstriVeCharacter::P2KeyboardAttack3()
+{
+	StartAttack3();
+}
+
+void AstriVeCharacter::P2KeyboardAttack4()
+{
+	StartAttack4();
+}
+
+void AstriVeCharacter::P2KeyboardJump()
+{
+	// jump on any touch
+	Jump();
+}
+
+void AstriVeCharacter::P2KeyboardStopJumping()
+{
+	StopJumping();
+}
+
+void AstriVeCharacter::P2KeyboardMoveRight(float _value)
+{
+	MoveRight(_value);
 }
 
 void AstriVeCharacter::TakeDamage(float _damageAmount)
