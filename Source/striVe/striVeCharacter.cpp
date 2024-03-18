@@ -234,6 +234,8 @@ void AstriVeCharacter::TakeDamage(float _damageAmount)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("We are taking damage for %f points."), _damageAmount);
 		playerHealth -= _damageAmount;
+
+		PlayDamageSoundEffect();
 	}
 	else
 	{

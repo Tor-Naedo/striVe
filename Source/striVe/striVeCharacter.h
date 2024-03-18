@@ -123,6 +123,10 @@ protected:
 	UFUNCTION(BlueprintCallable)
 		void TakeDamage(float _damageAmount);
 
+	//Make the Character Sound
+	UFUNCTION(BlueprintImplementableEvent)
+		void PlayDamageSoundEffect();
+
 	//Has the player used the LPunch Attack?
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attacks")
 		bool wasFirstAttackUsed;
