@@ -1,6 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "striVeCharacter.h"
+#include "striVeGameMode.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InputComponent.h"
@@ -57,28 +58,59 @@ maxDistanceApart = 800.0f;
 
 void AstriVeCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
-	//if(auto gameMode = Cast<AstriVeGameMode>(GetWorldChecked()->GetAuthGameMode()))
-	// set up gameplay key bindings
-	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AstriVeCharacter::Jump);
-	PlayerInputComponent->BindAction("Jump", IE_Released, this, &AstriVeCharacter::StopJumping);
-	PlayerInputComponent->BindAxis("MoveRight", this, &AstriVeCharacter::MoveRight);
-	PlayerInputComponent->BindAction("Crouch", IE_Pressed, this, &AstriVeCharacter::StartCrouching);
-	PlayerInputComponent->BindAction("Crouch", IE_Released, this, &AstriVeCharacter::StopCrouching);
-	PlayerInputComponent->BindAction("Block", IE_Pressed, this, &AstriVeCharacter::StartBlocking);
-	PlayerInputComponent->BindAction("Block", IE_Released, this, &AstriVeCharacter::StopBlocking);
+	if (auto gameMode = Cast<AstriVeGameMode>(GetWorld()->GetAuthGameMode()))
+	{
+		if (gameMode->player1 == this)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Player 1 has bound their controls."));
 
-	PlayerInputComponent->BindAction("Attack1", IE_Pressed, this, &AstriVeCharacter::StartAttack1);
-	//PlayerInputComponent->BindAction("Attack1", IE_Released, this, &AstriVeCharacter::StopAttack1); 
-	PlayerInputComponent->BindAction("Attack2", IE_Pressed, this, &AstriVeCharacter::StartAttack2);
-	//PlayerInputComponent->BindAction("Attack2", IE_Released, this, &AstriVeCharacter::StopAttack2); 
-	PlayerInputComponent->BindAction("Attack3", IE_Pressed, this, &AstriVeCharacter::StartAttack3);
-	//PlayerInputComponent->BindAction("Attack3", IE_Released, this, &AstriVeCharacter::StopAttack3); 
-	PlayerInputComponent->BindAction("Attack4", IE_Pressed, this, &AstriVeCharacter::StartAttack4);
-	//PlayerInputComponent->BindAction("Attack4", IE_Released, this, &AstriVeCharacter::StopAttack4); 
+			// set up gameplay key bindings
+			PlayerInputComponent->BindAction("JumpP1", IE_Pressed, this, &AstriVeCharacter::Jump);
+			PlayerInputComponent->BindAction("JumpP1", IE_Released, this, &AstriVeCharacter::StopJumping);
+			PlayerInputComponent->BindAxis("MoveRightP1", this, &AstriVeCharacter::MoveRight);
+			PlayerInputComponent->BindAction("Crouch", IE_Pressed, this, &AstriVeCharacter::StartCrouching);
+			PlayerInputComponent->BindAction("Crouch", IE_Released, this, &AstriVeCharacter::StopCrouching);
+			PlayerInputComponent->BindAction("Block", IE_Pressed, this, &AstriVeCharacter::StartBlocking);
+			PlayerInputComponent->BindAction("Block", IE_Released, this, &AstriVeCharacter::StopBlocking);
 
-	PlayerInputComponent->BindTouch(IE_Pressed, this, &AstriVeCharacter::TouchStarted);
-	PlayerInputComponent->BindTouch(IE_Released, this, &AstriVeCharacter::TouchStopped);
+			PlayerInputComponent->BindAction("Attack1P1", IE_Pressed, this, &AstriVeCharacter::StartAttack1);
+			//PlayerInputComponent->BindAction("Attack1", IE_Released, this, &AstriVeCharacter::StopAttack1); 
+			PlayerInputComponent->BindAction("Attack2P1", IE_Pressed, this, &AstriVeCharacter::StartAttack2);
+			//PlayerInputComponent->BindAction("Attack2", IE_Released, this, &AstriVeCharacter::StopAttack2); 
+			PlayerInputComponent->BindAction("Attack3P1", IE_Pressed, this, &AstriVeCharacter::StartAttack3);
+			//PlayerInputComponent->BindAction("Attack3", IE_Released, this, &AstriVeCharacter::StopAttack3); 
+			PlayerInputComponent->BindAction("Attack4P1", IE_Pressed, this, &AstriVeCharacter::StartAttack4);
+			//PlayerInputComponent->BindAction("Attack4", IE_Released, this, &AstriVeCharacter::StopAttack4); 
+
+			PlayerInputComponent->BindTouch(IE_Pressed, this, &AstriVeCharacter::TouchStarted);
+			PlayerInputComponent->BindTouch(IE_Released, this, &AstriVeCharacter::TouchStopped);
+		}
+		else
+		{
+			// set up gameplay key bindings
+			PlayerInputComponent->BindAction("Jump2", IE_Pressed, this, &AstriVeCharacter::Jump);
+			PlayerInputComponent->BindAction("Jump2", IE_Released, this, &AstriVeCharacter::StopJumping);
+			PlayerInputComponent->BindAxis("MoveRight2", this, &AstriVeCharacter::MoveRight);
+			PlayerInputComponent->BindAction("Crouch", IE_Pressed, this, &AstriVeCharacter::StartCrouching);
+			PlayerInputComponent->BindAction("Crouch", IE_Released, this, &AstriVeCharacter::StopCrouching);
+			PlayerInputComponent->BindAction("Block", IE_Pressed, this, &AstriVeCharacter::StartBlocking);
+			PlayerInputComponent->BindAction("Block", IE_Released, this, &AstriVeCharacter::StopBlocking);
+
+			PlayerInputComponent->BindAction("Attack1P2", IE_Pressed, this, &AstriVeCharacter::StartAttack1);
+			//PlayerInputComponent->BindAction("Attack1", IE_Released, this, &AstriVeCharacter::StopAttack1); 
+			PlayerInputComponent->BindAction("Attack2P2", IE_Pressed, this, &AstriVeCharacter::StartAttack2);
+			//PlayerInputComponent->BindAction("Attack2", IE_Released, this, &AstriVeCharacter::StopAttack2); 
+			PlayerInputComponent->BindAction("Attack3P2", IE_Pressed, this, &AstriVeCharacter::StartAttack3);
+			//PlayerInputComponent->BindAction("Attack3", IE_Released, this, &AstriVeCharacter::StopAttack3); 
+			PlayerInputComponent->BindAction("Attack4P2", IE_Pressed, this, &AstriVeCharacter::StartAttack4);
+			//PlayerInputComponent->BindAction("Attack4", IE_Released, this, &AstriVeCharacter::StopAttack4); 
+
+			PlayerInputComponent->BindTouch(IE_Pressed, this, &AstriVeCharacter::TouchStarted);
+			PlayerInputComponent->BindTouch(IE_Released, this, &AstriVeCharacter::TouchStopped);
+		}
+	}
 }
+
 
 void AstriVeCharacter::Jump()
 {
@@ -218,10 +250,10 @@ void AstriVeCharacter::P2KeyboardJump()
 	Jump();
 }
 
-void AstriVeCharacter::P2KeyboardStopJumping()
-{
-	StopJumping();
-}
+//void AstriVeCharacter::P2KeyboardStopJumping()
+//{
+	//StopJumping();
+//}
 
 void AstriVeCharacter::P2KeyboardMoveRight(float _value)
 {
