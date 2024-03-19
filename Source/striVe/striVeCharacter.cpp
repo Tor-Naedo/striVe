@@ -250,10 +250,10 @@ void AstriVeCharacter::P2KeyboardJump()
 	Jump();
 }
 
-//void AstriVeCharacter::P2KeyboardStopJumping()
-//{
-	//StopJumping();
-//}
+void AstriVeCharacter::P2KeyboardStopJumping()
+	{
+		StopJumping();
+	}
 
 void AstriVeCharacter::P2KeyboardMoveRight(float _value)
 {
@@ -281,7 +281,6 @@ void AstriVeCharacter::TakeDamage(float _damageAmount)
 	}
 }
 
-//NEEDS FIXING I THINK
 // Called every frame.
 void  AstriVeCharacter::Tick(float DeltaTime)
 {
