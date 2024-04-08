@@ -7,14 +7,6 @@
 #include "striVeCharacter.h"
 #include "striVeGameMode.generated.h"
 
-UENUM(BlueprintType)
-enum class ECharacterClass : uint8
-{
-	VE_Default				UMETA(DisplayName = "Mannequin"),
-	VE_FastCharacter		UMETA(DisplayName = "FastCharacter"),
-	VE_StrongCharacter		UMETA(DisplayName = "StrongCharacter"),
-	VE_GrapplerCharacter	UMETA(DisplayName = "GrapplerCharacter")
-};
 
 UCLASS(minimalapi)
 class AstriVeGameMode : public AGameModeBase
