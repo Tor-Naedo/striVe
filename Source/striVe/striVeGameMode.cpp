@@ -9,8 +9,8 @@ AstriVeGameMode::AstriVeGameMode()
 
 	//set the default values for variables
 	numRounds = 3;
-	roundTime = 99;
-	isTimerActive = false;
+	roundTime = 140;
+	isTimerActive = true;
 
 	// set default pawn class to our Blueprinted character
 	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/SideScrollerCPP/Blueprints/SideScrollerCharacter"));

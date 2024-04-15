@@ -49,6 +49,8 @@ playerHealth = 1.00f;
 wasFirstAttackUsed = false;
 isFlipped = false;
 maxDistanceApart = 800.0f;
+roundsWon = 0;
+hasLostRound = false;
 
 characterState = ECharacterState::VE_Default;
 characterClass = ECharacterClass::VE_Default;
@@ -283,6 +285,14 @@ void AstriVeCharacter::TakeDamage(float _damageAmount)
 	{
 		playerHealth = 0.00f;
 	}
+}
+
+void AstriVeCharacter::WinRound()
+{
+	otherPlayer->hasLostRound = true;
+	++roundsWon;
+	NotifyRoundEnd();
+	UpdateHUDRoundIcons();
 }
 
 // Called every frame.

@@ -127,6 +127,18 @@ protected:
 	UFUNCTION(BlueprintCallable)
 		void TakeDamage(float _damageAmount);
 
+	UFUNCTION(BlueprintCallable)
+		void WinRound();
+
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+		void NotifyRoundStart();
+
+	UFUNCTION(BlueprintImplementableEvent)
+		void NotifyRoundEnd();
+
+	UFUNCTION(BlueprintImplementableEvent)
+		void UpdateHUDRoundIcons();
+
 	//Make the Character Sound
 	UFUNCTION(BlueprintImplementableEvent)
 		void PlayDamageSoundEffect();
@@ -158,6 +170,14 @@ protected:
 	//Is the character currently crouching
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 		bool isCrouching;
+
+	//round-won
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Game Logic")
+		int roundsWon;
+
+	//round-loss?
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animations")
+		bool hasLostRound;
 
 public:
 	AstriVeCharacter();
