@@ -5,26 +5,26 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "striVeCharacter.h"
-#include "StrongCharacter.generated.h"
+#include "GrapplerCharacter.generated.h"
 
 UCLASS()
-class STRIVE_API AStrongCharacter : public AstriVeCharacter
+class STRIVE_API AGrapplerCharacter : public AstriVeCharacter
 {
 	GENERATED_BODY()
-	
+
 public:
 	// Sets default values for this character's properties
-	AStrongCharacter();
+	AGrapplerCharacter();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:
+public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-};
 
+};

@@ -87,6 +87,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Hitbox")
 		AActor* hurtbox;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Details")
+		ECharacterClass characterClass;
+
 	//The caharacter's transform
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Model")
 		FTransform transform;
