@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "BaseGameInstance.h"
 #include "GameFramework/Character.h"
 #include "striVeCharacter.generated.h"
 

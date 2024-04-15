@@ -26,4 +26,10 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player References")
 		ECharacterClass P2CharacterClass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameMode Settings")
+		float roundTime;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameMode Settings")
+		int numRounds;
 };

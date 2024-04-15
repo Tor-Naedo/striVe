@@ -21,4 +21,13 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player References")
 		AstriVeCharacter* player2;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameMode Settings")
+		float roundTime;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameMode Settings")
+		int numRounds;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameMode Settings")
+		bool isTimerActive;
 };
